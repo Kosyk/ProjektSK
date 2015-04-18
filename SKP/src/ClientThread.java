@@ -32,7 +32,7 @@ public void run() {
 				    System.out.println("Serwer otrzymał wiadomość i nazywa się:"+name);
 				    System.out.println("Jego adres: "+recv.getAddress());
 
-					Program.usersList.add(new User(name, recv.getAddress(),9050));
+					Program.usersList.add(new User(name, recv.getAddress()));
 				    i++;
 				}catch (SocketTimeoutException ste){
 					break;
