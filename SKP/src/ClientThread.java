@@ -23,17 +23,19 @@ public void run() {
 			socket.setSoTimeout(1010);
 			//Słuchanie serwerów
 			while(true){
-			try{
-			    socket.receive(recv);
-			    int length = recv.getLength();
-			    String name =
-	                    new String(recv.getData(), 0, length, "utf8");
-			    System.out.println("Serwer otrzymał wiadomość i nazywa się:"+name);
-			    System.out.println("Jego adres: "+recv.getAddress());
-			    recv.getAddress();
-			}catch (SocketTimeoutException ste){
+				try{
+				    socket.receive(recv);
+				    int length = recv.getLength();
+				    String name =
+		                    new String(recv.getData(), 0, length, "utf8");
+				    System.out.println("Serwer otrzymał wiadomość i nazywa się:"+name);
+				    System.out.println("Jego adres: "+recv.getAddress());
+				    recv.getAddress();
+				}catch (SocketTimeoutException ste){
+					break;
+				}
 			}
-			}
+			System.out.println("Wszystkich użytkowników już mam, wychodzę z while'a...");
 	} catch (Exception e) {
 		e.printStackTrace();
 	}
