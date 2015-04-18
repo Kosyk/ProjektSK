@@ -6,9 +6,9 @@ public class ServerThread implements Runnable
 {
 public void run() {
 	try {
-		 
+		DatagramSocket datagramSocket = new DatagramSocket(Config.PORT);
 	        while (true){
-	        	DatagramSocket datagramSocket = new DatagramSocket(Config.PORT);
+	        	
 	            DatagramPacket recv= new DatagramPacket( new byte[Config.BUFFER_SIZE], Config.BUFFER_SIZE);
 
 	            datagramSocket.receive(recv);
@@ -21,7 +21,7 @@ public void run() {
 	            InetAddress address = recv.getAddress();
 	            int port = recv.getPort();
 
-	            System.out.println(message+"to dostał serwer");
+	            System.out.println(message+" <---to dostał serwer");
 	            Thread.sleep(1000); //To oczekiwanie nie jest potrzebne dla
 	            // obsługi gniazda
 	            byte[] byteResponse = "Też witam".getBytes("utf8");

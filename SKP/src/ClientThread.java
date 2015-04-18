@@ -19,17 +19,16 @@ public void run() {
 		socket.send(sent);
 		
 		//Słuchanie serwera
-		while (true){
 			DatagramPacket recv = new DatagramPacket( new byte[Config.BUFFER_SIZE], Config.BUFFER_SIZE);
 			socket.setSoTimeout(1010);
 			
 			try{
 			    socket.receive(recv);
-			    System.out.println("Serwer otrzymał wiadomość: "+recv.getData().toString());
+			    System.out.println("Serwer otrzymał wiadomość ");
 			}catch (SocketTimeoutException ste){
 			    System.out.println("Serwer nie odpowiada");
 			}
-		}
+		
 	} catch (Exception e) {
 		e.printStackTrace();
 	}

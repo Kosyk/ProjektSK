@@ -5,9 +5,10 @@ public class Program {
  
     ServerThread sth= new ServerThread();
     ClientThread clt= new ClientThread();
-
-    clt.run();
-    sth.run();
+    Thread t1 = new Thread(sth);
+    Thread t2 = new Thread(clt);
+    t1.start();
+    t2.start();
 
     }
 }
