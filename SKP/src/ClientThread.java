@@ -24,7 +24,11 @@ public void run() {
 			
 			try{
 			    socket.receive(recv);
-			    System.out.println("Serwer otrzymał wiadomość ");
+			    int length = recv.getLength();
+			    String name =
+	                    new String(recv.getData(), 0, length, "utf8");
+
+			    System.out.println("Serwer otrzymał wiadomość i nazywa się:"+name);
 			}catch (SocketTimeoutException ste){
 			    System.out.println("Serwer nie odpowiada");
 			}

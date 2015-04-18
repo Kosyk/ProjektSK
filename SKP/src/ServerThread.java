@@ -22,9 +22,10 @@ public void run() {
 	            int port = recv.getPort();
 
 	            System.out.println(message+" <---to dostał serwer");
+	            String userName = System.getProperty("user.name");
 	            Thread.sleep(1000); //To oczekiwanie nie jest potrzebne dla
 	            // obsługi gniazda
-	            byte[] byteResponse = "Też witam".getBytes("utf8");
+	            byte[] byteResponse = userName.getBytes("utf8");
 	            DatagramPacket response = new DatagramPacket(
 	                        byteResponse, byteResponse.length, address, port);
 	            datagramSocket.send(response);
