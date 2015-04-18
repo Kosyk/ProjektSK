@@ -2,6 +2,7 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 
+
 public class ServerThread implements Runnable
 {
 public void run() {
@@ -17,14 +18,13 @@ public void run() {
 	            String message =
 	                    new String(recv.getData(), 0, length, "utf8");
 
-	            // Port i host który wysłał nam zapytanie
 	            InetAddress address = recv.getAddress();
 	            int port = recv.getPort();
 
 	            System.out.println(message+" <---to dostał serwer");
+	            //serwer odpowiada, jak się nazywa
 	            String userName = System.getProperty("user.name");
-	            Thread.sleep(1000); //To oczekiwanie nie jest potrzebne dla
-	            // obsługi gniazda
+	            Thread.sleep(1000);
 	            byte[] byteResponse = userName.getBytes("utf8");
 	            DatagramPacket response = new DatagramPacket(
 	                        byteResponse, byteResponse.length, address, port);

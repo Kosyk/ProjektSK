@@ -18,17 +18,19 @@ public void run() {
 				stringContents, stringContents.length, serverAddress, Config.PORT);
 		socket.send(sent);
 		
-		//Słuchanie serwera
+
 			DatagramPacket recv = new DatagramPacket( new byte[Config.BUFFER_SIZE], Config.BUFFER_SIZE);
 			socket.setSoTimeout(1010);
+			//Słuchanie serwerów
 			while(true){
 			try{
 			    socket.receive(recv);
 			    int length = recv.getLength();
 			    String name =
 	                    new String(recv.getData(), 0, length, "utf8");
-
 			    System.out.println("Serwer otrzymał wiadomość i nazywa się:"+name);
+			    System.out.println("Jego adres: "+recv.getAddress());
+			    recv.getAddress();
 			}catch (SocketTimeoutException ste){
 			}
 			}
