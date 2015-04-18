@@ -1,5 +1,7 @@
-public class Program {	
+import java.util.ArrayList;
 
+public class Program {	
+	static ArrayList<User> usersList =new ArrayList<User>();
     public static void main(String[] args) throws Exception{
  
     ServerThread sth= new ServerThread();
