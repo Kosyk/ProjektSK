@@ -23,7 +23,7 @@ public void run() {
 
 	            System.out.println(message+" <---to dostał serwer");
 	    
-	            if(address.isAnyLocalAddress()){
+	            if(address.isLoopbackAddress()){
 	                //serwer odpowiada, jak się nazywa
 		            String userName = System.getProperty("user.name");
 		            Thread.sleep(1000);
