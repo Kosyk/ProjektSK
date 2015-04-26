@@ -23,7 +23,7 @@ public void run() {
 
 	            System.out.println(message+" <---to dostał serwer");
 	    
-	            if(address.isLoopbackAddress()){
+	           
 	                //serwer odpowiada, jak się nazywa
 		            String userName = System.getProperty("user.name");
 		            Thread.sleep(1000);
@@ -32,7 +32,7 @@ public void run() {
 		                        byteResponse, byteResponse.length, address, port);
 		            datagramSocket.send(response);
 	            	
-	            }
+	           
 
         }
 	} catch (Exception e) {
