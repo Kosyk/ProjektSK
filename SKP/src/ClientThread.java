@@ -45,6 +45,7 @@ public void run() {
 				System.out.println("Nr"+(j+1));
 				Program.usersList.get(j).printUser();
 			}
+			//System.out.println("Wybierz użytkownika, oraz podaj ścieżkę do pliku, który chcesz pobrać:");
 	} catch (Exception e) {
 		e.printStackTrace();
 	}
