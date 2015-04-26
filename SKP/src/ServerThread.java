@@ -22,14 +22,16 @@ public void run() {
 	            int port = recv.getPort();
 
 	            System.out.println(message+" <---to dostał serwer");
-	            if (address!=InetAddress.getLocalHost()){
-		            //serwer odpowiada, jak się nazywa
+	    
+	            if(address.isAnyLocalAddress()){
+	                //serwer odpowiada, jak się nazywa
 		            String userName = System.getProperty("user.name");
 		            Thread.sleep(1000);
 		            byte[] byteResponse = userName.getBytes("utf8");
 		            DatagramPacket response = new DatagramPacket(
 		                        byteResponse, byteResponse.length, address, port);
 		            datagramSocket.send(response);
+	            	
 	            }
 
         }
