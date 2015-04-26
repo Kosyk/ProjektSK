@@ -32,12 +32,13 @@ public void run() {
 				    System.out.println("Serwer otrzymał wiadomość i nazywa się:"+name);
 				    System.out.println("Jego adres: "+recv.getAddress());
 
-					Program.usersList.add(new User(name, recv.getAddress()));
+					Program.usersList.add(new User(name, recv.getAddress(), 8500+i));
 				    i++;
 				}catch (SocketTimeoutException ste){
 					break;
 				}
 			}
+			i=0;
 			System.out.println("Wszystkich użytkowników już mam, wychodzę z while'a...");
 			System.out.println("Użytkownicy na liście");
 			for (int j=0; j<Program.usersList.size(); j++){
