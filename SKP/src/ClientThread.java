@@ -2,6 +2,7 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.SocketTimeoutException;
+import java.util.Scanner;
 
 public class ClientThread  implements Runnable
 {
@@ -46,6 +47,34 @@ public void run() {
 				System.out.println("Nr"+(j+1));
 				Program.usersList.get(j).printUser();
 			}
+			
+			System.out.println("Wybierz użytkownika:");
+			int choice;
+			Scanner in=new Scanner(System.in);
+			choice=in.nextInt()-1;
+			
+			
+			//prośba o listę katalogów/plików
+			DatagramSocket fileSocket = new DatagramSocket(Config.FILEPORT);
+			socket.setSoTimeout(1010);
+			byte[] request = "Lista".getBytes("utf8"); 
+
+			DatagramPacket fileRequest = new DatagramPacket(
+					request, request.length, Program.usersList.get(choice).getUserAddres(), Config.FILEPORT);
+			fileSocket.send(fileRequest);
+			
+			//oczekiwanie na listę katalogów
+			while(true){
+				try{
+					fileSocket.receive(recv);
+				}catch (SocketTimeoutException ste){
+					break;
+				}
+			}
+			
+			//wybór katalogu/pliku
+			
+			//odbiór pliku
 			
 	} catch (Exception e) {
 		e.printStackTrace();
