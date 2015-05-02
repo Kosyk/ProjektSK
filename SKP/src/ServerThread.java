@@ -23,7 +23,7 @@ public void run() {
 
 	            System.out.println(message+" <---to dostał serwer");
 	    
-	           
+	           if (message.equals("Witam w Rumbie")){
 	                //serwer odpowiada, jak się nazywa
 		            String userName = System.getProperty("user.name");
 		            Thread.sleep(1000);
@@ -31,9 +31,7 @@ public void run() {
 		            DatagramPacket response = new DatagramPacket(
 		                        byteResponse, byteResponse.length, address, port);
 		            datagramSocket.send(response);
-	            	
-	           
-
+	           }
         }
 	} catch (Exception e) {
 		e.printStackTrace();

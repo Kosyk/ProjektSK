@@ -21,31 +21,32 @@ public void run() {
 
 			DatagramPacket recv = new DatagramPacket( new byte[Config.BUFFER_SIZE], Config.BUFFER_SIZE);
 			socket.setSoTimeout(1010);
-			//Słuchanie serwerów
-			int i=0;
+			//Słuchanie serwerów			
 			while(true){
 				try{
 				    socket.receive(recv);
 				    int length = recv.getLength();
 				    String name =
 		                    new String(recv.getData(), 0, length, "utf8");
-				    System.out.println("Serwer otrzymał wiadomość i nazywa się:"+name);
-				    System.out.println("Jego adres: "+recv.getAddress());
-
-					Program.usersList.add(new User(name, recv.getAddress(), 8500+i));
-				    i++;
+				    	if (!name.equals(System.getProperty("user.name"))){
+				    		System.out.println("Serwer otrzymał wiadomość i nazywa się:"+name);
+						    System.out.println("Jego adres: "+recv.getAddress());
+				    		Program.usersList.add(new User(name, recv.getAddress()));
+				    	}
+				    		
+				    
 				}catch (SocketTimeoutException ste){
 					break;
 				}
 			}
-			i=0;
+			
 			System.out.println("Wszystkich użytkowników już mam, wychodzę z while'a...");
 			System.out.println("Użytkownicy na liście");
 			for (int j=0; j<Program.usersList.size(); j++){
 				System.out.println("Nr"+(j+1));
 				Program.usersList.get(j).printUser();
 			}
-			//System.out.println("Wybierz użytkownika, oraz podaj ścieżkę do pliku, który chcesz pobrać:");
+			
 	} catch (Exception e) {
 		e.printStackTrace();
 	}
