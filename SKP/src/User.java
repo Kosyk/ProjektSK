@@ -1,20 +1,17 @@
 import java.net.InetAddress;
 
-
 public class User {
 
 	private String userNname;
-	private InetAddress userAddres;
-
+	private InetAddress userAddress;
 
 	public User(String username, InetAddress address) {
 		userNname=username;
-		userAddres = address;
-
+		userAddress = address;
 	}
 	
-	public InetAddress getUserAddres() {
-		return userAddres;
+	public InetAddress getUserAddress() {
+		return userAddress;
 	}
 	
 	public String getUserNname() {
@@ -23,7 +20,7 @@ public class User {
 	
 	public void printUser(){
 		System.out.println("Nazwa: "+getUserNname());
-		System.out.println("Adres IP: "+getUserAddres());
+		System.out.println("Adres IP: "+getUserAddress());
 
 	}
 }
