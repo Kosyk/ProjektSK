@@ -36,9 +36,9 @@ public void run() {
 				    int length = recv.getLength();
 				    String name =
 		                    new String(recv.getData(), 0, length, "utf8");
-				    //	if (!name.equals(System.getProperty("user.name"))){
+				    	if (!name.equals(System.getProperty("user.name"))){
 				    		Program.usersList.add(new User(name, recv.getAddress()));
-				    //	}
+				    	}
 				    		
 				    
 				}catch (SocketTimeoutException ste){
