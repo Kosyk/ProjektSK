@@ -21,12 +21,21 @@ public class FileThread implements Runnable{
 	           InetAddress address = request.getAddress();
 	           int port = request.getPort();
 
-	           if (message.equals("Lista")){	           
-		            byte[] byteResponse = "Tu będą ścieżki".getBytes("utf8");
-		            Thread.sleep(1000);
-		            DatagramPacket response = new DatagramPacket(
-		                        byteResponse, byteResponse.length, address, port);
-		            fileServer.send(response);
+	           if (message.equals("Lista")){
+	        	    for(int i=0; i<Program.pathList.size();i++){
+	        	    	byte[] byteResponse = Program.pathList.get(i).getBytes("utf8");
+			            Thread.sleep(1000);
+			            DatagramPacket response = new DatagramPacket(
+			                        byteResponse, byteResponse.length, address, port);
+			            fileServer.send(response);
+	        	    }
+		         //   byte[] byteResponse = "Tu będą ścieżki".getBytes("utf8");
+		         //   Thread.sleep(1000);
+		         //   DatagramPacket response = new DatagramPacket(
+		         //               byteResponse, byteResponse.length, address, port);
+		         //   fileServer.send(response);
+		            
+		            
 	           }
 	           else {
 	        	   //wysyłanie pliku - ścieżka jako message

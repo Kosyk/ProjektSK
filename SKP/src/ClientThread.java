@@ -71,15 +71,19 @@ public class ClientThread  implements Runnable{
 				DatagramPacket rec = new DatagramPacket( new byte[Config.BUFFER_SIZE], Config.BUFFER_SIZE);
 				
 				//oczekiwanie na listę katalogów
+				System.out.println("Udostępnione ścieżki przez "+Program.usersList.get(choice).getUserNname());
+				int i=0;
 				while(true){
-					try{					
+					try{
+						
 						fileSocket.receive(rec);
 						int length = rec.getLength();
 					    String path =
-			                    new String(rec.getData(), 0, length, "utf8");
-					    System.out.println("Udostępnione ścieżki przez "+Program.usersList.get(choice).getUserNname());
-					    System.out.println(path);
+			                    new String(rec.getData(), 0, length, "utf8");					 
+					    System.out.println("Ścieżka nr "+i+": "+path);
+					    i++;
 					}catch (SocketTimeoutException ste){
+						i=0;
 						break;
 					}
 				}
