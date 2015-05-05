@@ -96,7 +96,7 @@ public class ClientThread  implements Runnable{
 						request, request.length, Program.usersList.get(choice).getUserAddress(), Config.FILEPORT);
 				fileSocket.send(fileRequest);
 				
-				//odbiór pliku
+				//odbiór pliku - póki co ścieżka, kiedyś plik
 				while(true){
 					try{
 						

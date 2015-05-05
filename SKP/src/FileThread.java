@@ -31,10 +31,9 @@ public class FileThread implements Runnable{
 	        	    }
            
 	           }
-	           else {
+	           else { //póki co żądana ścieżka, kiedyś plik
 	        	   byte[] byteResponse = Program.pathList.get(Integer.parseInt(message)).getBytes("utf8");
 		            Thread.sleep(1000);
-		            System.out.println(byteResponse.toString());
 		            DatagramPacket response = new DatagramPacket(
 		                        byteResponse, byteResponse.length, address, port);
 		            fileServer.send(response);
