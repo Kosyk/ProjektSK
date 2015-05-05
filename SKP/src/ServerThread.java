@@ -7,10 +7,6 @@ public class ServerThread implements Runnable
 {
 public void run() {
 	try {
-		FileThread fth= new FileThread();
-		Thread t3 = new Thread(fth);
-		t3.start();
-		
 		DatagramSocket datagramSocket = new DatagramSocket(Config.PORT);
 	        while (true){
 	        	

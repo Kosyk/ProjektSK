@@ -8,19 +8,19 @@ public class FileThread implements Runnable{
 	@Override
 	public void run() {
 		try {
-			DatagramSocket datagramSocket = new DatagramSocket(Config.FILEPORT);
+			DatagramSocket fileServer = new DatagramSocket(Config.FILEPORT);
 		        while (true){
 		        	
-		            DatagramPacket recv= new DatagramPacket( new byte[Config.BUFFER_SIZE], Config.BUFFER_SIZE);
+		            DatagramPacket request= new DatagramPacket( new byte[Config.BUFFER_SIZE], Config.BUFFER_SIZE);
 
-		            datagramSocket.receive(recv);
+		            fileServer.receive(request);
 
-		            int length = recv.getLength();
+		            int length = request.getLength();
 		            String message =
-		                    new String(recv.getData(), 0, length, "utf8");
+		                    new String(request.getData(), 0, length, "utf8");
 
-		            InetAddress address = recv.getAddress();
-		            int port = recv.getPort();
+		            InetAddress address = request.getAddress();
+		            int port = request.getPort();
 
 		           if (message.equals("Lista")){
 			           
@@ -28,7 +28,7 @@ public class FileThread implements Runnable{
 			            Thread.sleep(1000);
 			            DatagramPacket response = new DatagramPacket(
 			                        byteResponse, byteResponse.length, address, port);
-			            datagramSocket.send(response);
+			            fileServer.send(response);
 		           }
 		           else {
 		        	   //wysyłanie pliku - ścieżka jako message

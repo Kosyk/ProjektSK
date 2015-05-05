@@ -11,9 +11,12 @@ public class Program {
     Thread t2 = new Thread(cth);
     
     t1.start();
-    t2.start();
+    t2.start();  
+    //część pliku
+    FileThread fth= new FileThread();
+    Thread t3 = new Thread(fth);
+    t3.start();
     
-
     }
 }
 
