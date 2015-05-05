@@ -17,9 +17,9 @@ public class Program {
     	if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
     		Program.pathList.add(chooser.getSelectedFile().getAbsolutePath());
     	} else 
-    		break;
-    	
+    		break;	
     	}
+    	System.out.println("Lista udostępnionych katalogów:");
     	for (int i=0; i<Program.pathList.size();i++){
     		System.out.println(Program.pathList.get(i));
     	}

@@ -29,16 +29,15 @@ public class FileThread implements Runnable{
 			                        byteResponse, byteResponse.length, address, port);
 			            fileServer.send(response);
 	        	    }
-		         //   byte[] byteResponse = "Tu będą ścieżki".getBytes("utf8");
-		         //   Thread.sleep(1000);
-		         //   DatagramPacket response = new DatagramPacket(
-		         //               byteResponse, byteResponse.length, address, port);
-		         //   fileServer.send(response);
-		            
-		            
+           
 	           }
 	           else {
-	        	   //wysyłanie pliku - ścieżka jako message
+	        	   byte[] byteResponse = Program.pathList.get(Integer.parseInt(message)).getBytes("utf8");
+		            Thread.sleep(1000);
+		            System.out.println(byteResponse.toString());
+		            DatagramPacket response = new DatagramPacket(
+		                        byteResponse, byteResponse.length, address, port);
+		            fileServer.send(response);
 	           }
         }    
 		} catch (Exception e) {

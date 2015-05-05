@@ -71,7 +71,7 @@ public class ClientThread  implements Runnable{
 				DatagramPacket rec = new DatagramPacket( new byte[Config.BUFFER_SIZE], Config.BUFFER_SIZE);
 				
 				//oczekiwanie na listę katalogów
-				System.out.println("Udostępnione ścieżki przez "+Program.usersList.get(choice).getUserNname());
+				System.out.println("Udostępnione ścieżki przez "+Program.usersList.get(choice).getUserNname()+":");
 				int i=0;
 				while(true){
 					try{
@@ -89,8 +89,27 @@ public class ClientThread  implements Runnable{
 				}
 				
 				//wybór katalogu/pliku
+				System.out.println("Wybierz numer ścieżki pliku, który chcesz pobrać");
+				i=in.nextInt();
+				request=Integer.toString(i).getBytes("utf8");
+				fileRequest = new DatagramPacket(
+						request, request.length, Program.usersList.get(choice).getUserAddress(), Config.FILEPORT);
+				fileSocket.send(fileRequest);
 				
 				//odbiór pliku
+				while(true){
+					try{
+						
+						fileSocket.receive(rec);
+						int length = rec.getLength();
+					    String path =
+			                    new String(rec.getData(), 0, length, "utf8");					 
+					    System.out.println("Póki co żądana ścieżka: "+path);
+					}catch (SocketTimeoutException ste){
+						break;
+					}
+				}
+				
 			}
 			else {
 				System.out.println("Brak podłączonych użytkowników");
