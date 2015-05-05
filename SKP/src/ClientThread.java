@@ -36,9 +36,9 @@ public void run() {
 				    int length = recv.getLength();
 				    String name =
 		                    new String(recv.getData(), 0, length, "utf8");
-				    	if (!name.equals(System.getProperty("user.name"))){
+				    	//if (!name.equals(System.getProperty("user.name"))){
 				    		Program.usersList.add(new User(name, recv.getAddress()));
-				    	}
+				    //	}
 				    		
 				    
 				}catch (SocketTimeoutException ste){
@@ -76,6 +76,11 @@ public void run() {
 				while(true){
 					try{
 						fileSocket.receive(recv);
+						int length = recv.getLength();
+					    String path =
+			                    new String(recv.getData(), 0, length, "utf8");
+					    System.out.println("Udostępnione ścieżki przez"+Program.usersList.get(choice).getUserNname());
+					    System.out.println(path);
 					}catch (SocketTimeoutException ste){
 						break;
 					}
