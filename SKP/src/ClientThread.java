@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import javax.swing.JFileChooser;
+import javax.swing.UIManager;
 
 public class ClientThread  implements Runnable{
 	
@@ -107,20 +108,7 @@ public class ClientThread  implements Runnable{
 						request, request.length, Program.usersList.get(choice).getUserAddress(), Config.FILEPORT);
 				fileSocket.send(fileRequest);
 				
-				//odbiór pliku - póki co ścieżka, kiedyś plik
-			/*	while(true){
-					try{
-						
-						fileSocket.receive(rec);
-						int length = rec.getLength();
-					    String path =
-			                    new String(rec.getData(), 0, length, "utf8");					 
-					    System.out.println("\nPóki co żądana ścieżka: "+path);
-					}catch (SocketTimeoutException ste){
-						break;
-					}
-				}*/
-				
+				//odbiór pliku	
 				saveFile(fileSocket, rec);
 			}
 			else {
@@ -135,29 +123,26 @@ public class ClientThread  implements Runnable{
 	void saveFile(DatagramSocket datagramSocket, DatagramPacket datagramPacket){
         try {
         	String path=null;
+        	UIManager.put("FileChooser.cancelButtonText", "Anuluj");
 			JFileChooser chooser = new JFileChooser();
+			chooser.setApproveButtonText("Zapisz");
 	    	chooser.setDialogTitle("Podaj ścieżkę, pod którą chcesz zapisać plik:");
-
 	    	if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
 	    		path=chooser.getSelectedFile().getAbsolutePath();
-	    	}
-			FileOutputStream f=new FileOutputStream(path);
-			while(true) {
-	                   try {
-	                	   datagramSocket.receive(datagramPacket);
-
-	                	   f.write(datagramPacket.getData(), 0, datagramPacket.getLength()); 
-
-	                	   f.flush();
-		                    f.close();
+	    		FileOutputStream fileOutputStream=new FileOutputStream(path);
+				
+				while(true) {
+					try {
+	             	   datagramSocket.receive(datagramPacket);
+	             	   fileOutputStream.write(datagramPacket.getData(), 0, datagramPacket.getLength()); 
+	             	   fileOutputStream.flush();
+	             	   fileOutputStream.close();
 					} catch (SocketTimeoutException e) {
 						break;
-					}
-	                    
-	                    //System.out.println(new String(datagramPacket.getData(),0,datagramPacket.getLength()));                             
-	              
-	                    	
-	        }
+					}                  	
+		        }
+	    	}
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

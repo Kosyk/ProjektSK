@@ -33,16 +33,9 @@ public class FileThread implements Runnable{
 	        	    }
            
 	           }
-	           else { //póki co żądana ścieżka, kiedyś plik
+	           else { //wysyła plik, message jako numer ścieżki
 	        	   sendFile(Integer.parseInt(message), fileServer, address, port );
-	        	         Thread.sleep(1000);
-	        	 /*  byte[] byteResponse = Program.pathList.get(Integer.parseInt(message)).getBytes("utf8");
-	        	    Thread.sleep(1000);
-	        	    System.out.println(byteResponse.toString());
-	        	    DatagramPacket response = new DatagramPacket(
-	        	    byteResponse, byteResponse.length, address, port);
-	        	    fileServer.send(response);*/
-		      
+	        	   Thread.sleep(1000);      
 	           }
         }    
 		} catch (Exception e) {
@@ -51,18 +44,17 @@ public class FileThread implements Runnable{
 	}
 
 	
-	
 	void sendFile(int pathNumber, DatagramSocket datagramSocket, InetAddress address, int port){
         try {
-        	 byte b[]=new byte[1024];
-             FileInputStream f=new FileInputStream(Program.pathList.get(pathNumber));
+        	 byte byteArray[]=new byte[2000];
+             FileInputStream fileInputStream=new FileInputStream(Program.pathList.get(pathNumber));
              int i=0;
-             while(f.available()!=0){
-                         b[i]=(byte)f.read();
-                         i++;
+             while(fileInputStream.available()!=0){
+            	 byteArray[i]=(byte)fileInputStream.read();
+                 i++;
              }                     
-             f.close();
-			datagramSocket.send(new DatagramPacket(b,i,address, port));
+             fileInputStream.close();
+			datagramSocket.send(new DatagramPacket(byteArray,i,address, port));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
