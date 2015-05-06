@@ -148,7 +148,7 @@ public class ClientThread  implements Runnable{
 	                    System.out.println(new String(datagramPacket.getData(),0,datagramPacket.getLength()));                             
 	              
 	                    while(datagramPacket.getData() != null) {
-	                    	f.write(datagramPacket.getData(),datagramPacket.getData().length , datagramPacket.getData().length);
+	                    	f.write(datagramPacket.getData(),0, datagramPacket.getData().length);
 	         
 	                    }                     
 	                    f.close();
