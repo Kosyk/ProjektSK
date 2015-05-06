@@ -15,7 +15,7 @@ public class Program {
     	UIManager.put("FileChooser.cancelButtonText", "Zakończ wybieranie");
     	JFileChooser chooser = new JFileChooser();
     	chooser.setDialogTitle("Wybierz udostępnione pliki");
-    //	chooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+    	chooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
     	chooser.setApproveButtonText("Udostępnij");
     	
     	while (true){		
