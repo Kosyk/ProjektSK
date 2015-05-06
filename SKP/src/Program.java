@@ -14,7 +14,7 @@ public class Program {
     	//wybieranie udostępnianych ścieżek
     	UIManager.put("FileChooser.cancelButtonText", "Zakończ wybieranie");
     	JFileChooser chooser = new JFileChooser();
-    	chooser.setDialogTitle("Wybierz udostępnione pliki");
+    	chooser.setDialogTitle("Wybierz udostępnione pliki i katalogi");
     	chooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
     	chooser.setApproveButtonText("Udostępnij");
     	
@@ -26,7 +26,7 @@ public class Program {
     	}
     	
     	if (!Program.pathList.isEmpty()){
-    		System.out.println("Lista udostępnionych katalogów:");
+    		System.out.println("Lista udostępnionych katalogów i plików:");
         	for (int i=0; i<Program.pathList.size();i++){
         		System.out.println(Program.pathList.get(i));
         	}
