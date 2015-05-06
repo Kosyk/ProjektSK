@@ -1,3 +1,4 @@
+import java.io.FileOutputStream;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
@@ -6,6 +7,8 @@ import java.net.NetworkInterface;
 import java.net.SocketTimeoutException;
 import java.util.List;
 import java.util.Scanner;
+
+import javax.swing.JFileChooser;
 
 public class ClientThread  implements Runnable{
 	
@@ -105,7 +108,7 @@ public class ClientThread  implements Runnable{
 				fileSocket.send(fileRequest);
 				
 				//odbiór pliku - póki co ścieżka, kiedyś plik
-				while(true){
+				/*while(true){
 					try{
 						
 						fileSocket.receive(rec);
@@ -116,8 +119,9 @@ public class ClientThread  implements Runnable{
 					}catch (SocketTimeoutException ste){
 						break;
 					}
-				}
+				}*/
 				
+				saveFile(fileSocket, rec);
 			}
 			else {
 				System.out.println("\nBrak podłączonych użytkowników");
@@ -126,5 +130,32 @@ public class ClientThread  implements Runnable{
 		} catch (Exception e) {
 			e.printStackTrace();
 		}	   
+	}
+	
+	void saveFile(DatagramSocket datagramSocket, DatagramPacket datagramPacket){
+        try {
+        	String path=null;
+			JFileChooser chooser = new JFileChooser();
+	    	chooser.setDialogTitle("Podaj ścieżkę, pod którą chcesz zapisać plik:");
+
+	    	if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+	    		path=chooser.getSelectedFile().getAbsolutePath();
+	    	}
+			FileOutputStream f=new FileOutputStream(path);
+			while(true) {
+	                   
+	                    datagramSocket.receive(datagramPacket);
+	                    System.out.println(new String(datagramPacket.getData(),0,datagramPacket.getLength()));                             
+	              
+	                    while(datagramPacket.getData() != null) {
+	                    	f.write(datagramPacket.getData(),datagramPacket.getData().length , datagramPacket.getData().length);
+	         
+	                    }                     
+	                    f.close();
+	        }
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+        
 	}
 } 
