@@ -137,6 +137,7 @@ public class ClientThread  implements Runnable{
 	             	   fileOutputStream.write(datagramPacket.getData(), 0, datagramPacket.getLength()); 
 	             	   fileOutputStream.flush();
 	             	   fileOutputStream.close();
+	             	   System.out.println("Plik zapisany");
 					} catch (SocketTimeoutException e) {
 						break;
 					}                  	
