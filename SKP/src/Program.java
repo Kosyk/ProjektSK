@@ -15,7 +15,7 @@ public class Program {
     	UIManager.put("FileChooser.cancelButtonText", "Zakończ wybieranie");
     	JFileChooser chooser = new JFileChooser();
     	chooser.setDialogTitle("Wybierz udostępnione pliki");
-    	chooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+    //	chooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
     	chooser.setApproveButtonText("Udostępnij");
     	
     	while (true){		
@@ -25,12 +25,14 @@ public class Program {
 	    		break;	
     	}
     	
-    	System.out.println("Lista udostępnionych katalogów:");
-    	for (int i=0; i<Program.pathList.size();i++){
-    		System.out.println(Program.pathList.get(i));
+    	if (!Program.pathList.isEmpty()){
+    		System.out.println("Lista udostępnionych katalogów:");
+        	for (int i=0; i<Program.pathList.size();i++){
+        		System.out.println(Program.pathList.get(i));
+        	}
     	}
-    	
-    	
+    	 	
+    	//Tworzenie wątków
 	    ServerThread sth= new ServerThread();
 	    ClientThread cth= new ClientThread();
 	    FileThread fth= new FileThread();
