@@ -108,7 +108,7 @@ public class ClientThread  implements Runnable{
 				fileSocket.send(fileRequest);
 				
 				//odbiór pliku - póki co ścieżka, kiedyś plik
-				/*while(true){
+			/*	while(true){
 					try{
 						
 						fileSocket.receive(rec);
@@ -143,13 +143,18 @@ public class ClientThread  implements Runnable{
 	    	}
 			FileOutputStream f=new FileOutputStream(path);
 			while(true) {
-	                   
-	                    datagramSocket.receive(datagramPacket);
+	                   try {
+	                	   datagramSocket.receive(datagramPacket);
+	                	   f.write(datagramPacket.getData(), 0, datagramPacket.getLength()); 
+	                	   f.flush();
+		                    f.close();
+					} catch (SocketTimeoutException e) {
+						break;
+					}
+	                    
 	                    //System.out.println(new String(datagramPacket.getData(),0,datagramPacket.getLength()));                             
 	              
-	                    	f.write(datagramPacket.getData());
-	                          
-	                    f.close();
+	                    	
 	        }
 		} catch (Exception e) {
 			e.printStackTrace();

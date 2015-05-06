@@ -36,6 +36,12 @@ public class FileThread implements Runnable{
 	           else { //póki co żądana ścieżka, kiedyś plik
 	        	   sendFile(Integer.parseInt(message), fileServer, address, port );
 	        	         Thread.sleep(1000);
+	        	 /*  byte[] byteResponse = Program.pathList.get(Integer.parseInt(message)).getBytes("utf8");
+	        	    Thread.sleep(1000);
+	        	    System.out.println(byteResponse.toString());
+	        	    DatagramPacket response = new DatagramPacket(
+	        	    byteResponse, byteResponse.length, address, port);
+	        	    fileServer.send(response);*/
 		      
 	           }
         }    
