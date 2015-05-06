@@ -145,12 +145,10 @@ public class ClientThread  implements Runnable{
 			while(true) {
 	                   
 	                    datagramSocket.receive(datagramPacket);
-	                    System.out.println(new String(datagramPacket.getData(),0,datagramPacket.getLength()));                             
+	                    //System.out.println(new String(datagramPacket.getData(),0,datagramPacket.getLength()));                             
 	              
-	                    while(datagramPacket.getData() != null) {
 	                    	f.write(datagramPacket.getData());
-	         
-	                    }                     
+	                          
 	                    f.close();
 	        }
 		} catch (Exception e) {
