@@ -23,9 +23,7 @@ public class ServerThread implements Runnable{
 	
 	            InetAddress address = recv.getAddress();
 	            int port = recv.getPort();
-	
-	            System.out.println(message+" <---to dostał serwer");
-	    
+	              
 	           if (message.equals("Witam w Rumbie")){
 	                //serwer odpowiada, jak się nazywa
 		            String userName = System.getProperty("user.name");

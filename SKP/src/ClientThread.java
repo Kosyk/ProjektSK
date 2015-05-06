@@ -13,8 +13,15 @@ public class ClientThread  implements Runnable{
 		
 	    try {
 	    	//Wysyłanie zapytania na broadcast
-	    	List<InterfaceAddress> interfaceAddress = NetworkInterface.getNetworkInterfaces().nextElement().getInterfaceAddresses();
-	    	InetAddress broadcast = interfaceAddress.get(1).getBroadcast(); 	
+	    	List<InterfaceAddress> interfaceAddress;
+	    	InetAddress broadcast = InetAddress.getLocalHost();
+			try {
+				interfaceAddress = NetworkInterface.getNetworkInterfaces().nextElement().getInterfaceAddresses();
+				broadcast = interfaceAddress.get(1).getBroadcast(); 
+			} catch (Exception e) {
+				System.out.println("Wystąpił problem z pobraniem adresu broadcast");
+			}
+	    		
 	    	DatagramSocket socket = new DatagramSocket();
 
 	    	byte[] message = "Witam w Rumbie".getBytes("utf8");	        
@@ -43,18 +50,19 @@ public class ClientThread  implements Runnable{
 				}
 			}	
 				
-			System.out.println("Przeszukano sieć");	
+			System.out.println("\nPrzeszukano sieć");	
 			
 			if (!Program.usersList.isEmpty()){
 				
 				//Wypisanie listy użytkowników
-				System.out.println("Użytkownicy na liście");
+				System.out.println("\nUżytkownicy na liście");
 				for (int j=0; j<Program.usersList.size(); j++){
 					System.out.println("Nr "+(j));
 					Program.usersList.get(j).printUser();
 				}
 				
-				System.out.println("Wybierz numer użytkownika, od którego chcesz pobrać plik:");
+				//wybór konkretnego użytkownika
+				System.out.println("\nWybierz numer użytkownika, od którego chcesz pobrać plik:");
 				int choice;
 				Scanner in=new Scanner(System.in);
 				choice=in.nextInt();
@@ -71,7 +79,7 @@ public class ClientThread  implements Runnable{
 				DatagramPacket rec = new DatagramPacket( new byte[Config.BUFFER_SIZE], Config.BUFFER_SIZE);
 				
 				//oczekiwanie na listę katalogów
-				System.out.println("Udostępnione ścieżki przez "+Program.usersList.get(choice).getUserNname()+":");
+				System.out.println("\nUdostępnione ścieżki przez "+Program.usersList.get(choice).getUserNname()+":");
 				int i=0;
 				while(true){
 					try{
@@ -89,7 +97,7 @@ public class ClientThread  implements Runnable{
 				}
 				
 				//wybór katalogu/pliku
-				System.out.println("Wybierz numer ścieżki pliku, który chcesz pobrać");
+				System.out.println("\nWybierz numer ścieżki pliku, który chcesz pobrać");
 				i=in.nextInt();
 				request=Integer.toString(i).getBytes("utf8");
 				fileRequest = new DatagramPacket(
@@ -104,7 +112,7 @@ public class ClientThread  implements Runnable{
 						int length = rec.getLength();
 					    String path =
 			                    new String(rec.getData(), 0, length, "utf8");					 
-					    System.out.println("Póki co żądana ścieżka: "+path);
+					    System.out.println("\nPóki co żądana ścieżka: "+path);
 					}catch (SocketTimeoutException ste){
 						break;
 					}
@@ -112,7 +120,7 @@ public class ClientThread  implements Runnable{
 				
 			}
 			else {
-				System.out.println("Brak podłączonych użytkowników");
+				System.out.println("\nBrak podłączonych użytkowników");
 			}		
 				
 		} catch (Exception e) {

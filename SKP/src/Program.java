@@ -10,6 +10,7 @@ public class Program {
 	
     public static void main(String[] args) throws Exception{
  
+    	//wybieranie udostępnianych ścieżek
     	while (true){
     	JFileChooser chooser = new JFileChooser();
     	chooser.setDialogTitle("Wybierz udostępnione pliki");
