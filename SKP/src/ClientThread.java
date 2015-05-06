@@ -145,7 +145,9 @@ public class ClientThread  implements Runnable{
 			while(true) {
 	                   try {
 	                	   datagramSocket.receive(datagramPacket);
+
 	                	   f.write(datagramPacket.getData(), 0, datagramPacket.getLength()); 
+
 	                	   f.flush();
 		                    f.close();
 					} catch (SocketTimeoutException e) {
